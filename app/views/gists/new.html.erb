@@ -1,0 +1,27 @@
+<%= error_messages(@gist) %>
+
+<%= form_for(@gist, html: { class: 'form' }) do |f| %>
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :language %>
+    <%= f.select :language, Gist::Languages, { prompt: 'Please select...' }, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :visible, class: 'checkbox' do %>
+      <%= f.check_box :visible %> Visible?
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :code %>
+    <%= f.text_area :code, class: 'form-control code-area', rows: 20 %>
+  </div>
+
+  <%= f.submit 'Create', class: 'btn btn-primary' %>
+  <%= link_to 'Cancel', user_gists_path(current_user), class: 'btn' %>
+<% end %>

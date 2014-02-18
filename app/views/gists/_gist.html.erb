@@ -1,0 +1,25 @@
+<div class="gist">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <%= gist.name %>
+
+      <% unless gist.visible? %>
+        <span class="label label-default">Private</span>
+      <% end %>
+
+      <span class="pull-right">
+        Created <%= gist.created_at.to_s(:short) %> by <%= link_to gist.user.username, user_gists_path(gist.user) %>
+      </span>
+    </div>
+    <div class="panel-body">
+      <%= gist.highlight %>
+    </div>
+  </div>
+  
+
+  <% if gist.owner?(current_user) %>
+    <%= link_to 'Edit', edit_gist_path(gist) %> | <%= link_to 'Delete', gist_path(gist) %> |
+  <% end %>
+
+  <%= link_to 'Permalink', gist_path(gist) %>
+</div>
